@@ -106,3 +106,7 @@
 - Répartition équitable des tâches et validation en groupe.
 
 ---
+
+### Modele MCD
+
+![MCD](image.png)
