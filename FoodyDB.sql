@@ -74,11 +74,9 @@ CREATE TABLE Paiements (
 
 
 
--- AJOUTS DE TROIS TABLES CI DESSOUS
-
 -- Table Véhicule
 CREATE TABLE Vehicule (
-    ID_Vehicule INT PRIMARY KEY,
+    ID_Vehicule SERIAL PRIMARY KEY,  -- Utilisation de SERIAL pour un ID auto-incrémenté
     Marque VARCHAR(50),
     Modele VARCHAR(50),
     Immatriculation VARCHAR(20),
@@ -88,7 +86,7 @@ CREATE TABLE Vehicule (
 
 -- Table Livreur
 CREATE TABLE Livreur (
-    ID_Livreur INT PRIMARY KEY,
+    ID_Livreur SERIAL PRIMARY KEY,  -- Utilisation de SERIAL pour un ID auto-incrémenté
     ID_Employe INT,
     ID_Vehicule INT,
     Zone_Livraison TEXT,
@@ -98,12 +96,12 @@ CREATE TABLE Livreur (
 
 -- Création de la table Logs_Activites
 CREATE TABLE Logs_Activites (
-    ID_Log INT AUTO_INCREMENT PRIMARY KEY,            -- Identifiant unique
-    ID_Employe INT NOT NULL,                          -- Employé ayant généré le log
-    ID_Commande INT DEFAULT NULL,                    -- Commande concernée (optionnel)
-    Action VARCHAR(255) NOT NULL,                    -- Description de l'action
-    Date_Action DATETIME NOT NULL DEFAULT NOW(),     -- Date et heure de l'action
-    Details TEXT DEFAULT NULL,                       -- Détails supplémentaires
+    ID_Log SERIAL PRIMARY KEY,               -- Utilisation de SERIAL au lieu de AUTO_INCREMENT
+    ID_Employe INT NOT NULL,                 -- Employé ayant généré le log
+    ID_Commande INT DEFAULT NULL,            -- Commande concernée (optionnel)
+    Action VARCHAR(255) NOT NULL,            -- Description de l'action
+    Date_Action TIMESTAMP NOT NULL DEFAULT NOW(), -- Date et heure de l'action
+    Details TEXT DEFAULT NULL,               -- Détails supplémentaires
 
     -- Clés étrangères
     CONSTRAINT FK_Logs_Employe FOREIGN KEY (ID_Employe) REFERENCES Employes(ID_Employe) ON DELETE CASCADE,
@@ -111,5 +109,3 @@ CREATE TABLE Logs_Activites (
 );
 
 
-ALTER TABLE Details_Commande
-ADD PRIMARY KEY (ID_Commande, ID_Plat);
