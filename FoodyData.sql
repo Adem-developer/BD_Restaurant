@@ -102,7 +102,7 @@ VALUES
     ('Peugeot', 'Partner', 'AB-123-CD', 500, TRUE),
     ('Renault', 'Kangoo', 'EF-456-GH', 600, TRUE),
     ('Citroën', 'Berlingo', 'IJ-789-KL', 400, TRUE),
-    ('Ford', 'Transit', 'MN-012-OP', 800, FALSE), -- Non disponible
+    ('Ford', 'Transit', 'MN-012-OP', 800, TRUE),
     ('Mercedes', 'Sprinter', 'QR-345-ST', 1000, TRUE);
 
 
@@ -112,11 +112,12 @@ VALUES
     (1, 1, 'Centre-ville'),
     (3, 2, 'Banlieue nord'),
     (4, 3, 'Quartiers est'),
-    (5, 4, 'Banlieue sud'), -- Utilise un véhicule non disponible
+    (5, 4, 'Banlieue sud'),
     (7, 5, 'Périphérie ouest');
 
+
 -- Insertion des données dans Logs_Activites
-INSERT INTO Logs_Activites (ID_Employe, ID_Commande, Action, Details)
+INSERT INTO Logs_Activites (ID_Employe, ID_Commande, actiondescr, Details)
 VALUES
     (1, 1, 'Création de commande', 'Commande #1 créée par Jean Dupont'),
     (3, NULL, 'Modification de menu', 'Prix du plat "Pizza Margherita" mis à jour'),

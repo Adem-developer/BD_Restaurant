@@ -94,18 +94,15 @@ CREATE TABLE Livreur (
     FOREIGN KEY (ID_Vehicule) REFERENCES Vehicule(ID_Vehicule)
 );
 
--- Création de la table Logs_Activites
 CREATE TABLE Logs_Activites (
     ID_Log SERIAL PRIMARY KEY,               -- Utilisation de SERIAL au lieu de AUTO_INCREMENT
     ID_Employe INT NOT NULL,                 -- Employé ayant généré le log
     ID_Commande INT DEFAULT NULL,            -- Commande concernée (optionnel)
-    Action VARCHAR(255) NOT NULL,            -- Description de l'action
+    ActionDescr VARCHAR(255) NOT NULL,            -- Description de l'action
     Date_Action TIMESTAMP NOT NULL DEFAULT NOW(), -- Date et heure de l'action
     Details TEXT DEFAULT NULL,               -- Détails supplémentaires
 
     -- Clés étrangères
     CONSTRAINT FK_Logs_Employe FOREIGN KEY (ID_Employe) REFERENCES Employes(ID_Employe) ON DELETE CASCADE,
-    CONSTRAINT FK_Logs_Commande FOREIGN KEY (ID_Commande) REFERENCES Commandes(ID_Commande) ON DELETE SET NULL
-);
-
+    CONSTRAINT FK_Logs_Commande FOREIGN KEY (ID_Commande) REFERENCES Commandes(ID_Commande) ON DELETE SET NULL);
 
