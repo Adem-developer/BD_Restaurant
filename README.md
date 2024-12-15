@@ -65,11 +65,11 @@
 ---
 
 ### **4. Organisation et Répartition des Tâches**
-1. **Modélisation de la base de données (MCD et MLD)** : Adem.
+1. **Modélisation de la base de données** : Adem.
 2. **Implémentation des tables et contraintes** : Adem.
 3. **Développement des transactions** : Romain.
 4. **Création des triggers** : Djamel.
-5. **Développement des fonctions** : Djamel.
+5. **Développement des fonctions** : Djamel & Adem.
 6. **Tests et optimisation** : Tous les membres.
 7. **Rapport** : Tous les membres.
 8. **Diaporama** : Adem
