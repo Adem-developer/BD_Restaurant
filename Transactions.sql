@@ -1,12 +1,12 @@
 -- Transaction 1
 BEGIN;
 
-    INSERT INTO Commandes (ID_Client, Date_Commande, Statut, Total_Commande, ID_Client, ID_Employes)
-    VALUES (0, '20241216', 0, 63, 0, 0)
-    RETURNING ID_Commande AS id;
+INSERT INTO Commandes (ID_Client, ID_Commande, Date_Commande, Statut, Total_Commande, ID_Employe)
+VALUES (9, 23, '20241216', 'EN_COURS', 5, 3)
+RETURNING ID_Commande;
 
-    INSERT INTO Details_Commande(ID_Commande, ID_Plat, Quantite)
-    VALUES (id, 0, 3);
+INSERT INTO Details_Commande(ID_Commande, ID_Plat, Quantite)
+VALUES (23, 4, 3); 
 
 COMMIT;
 
