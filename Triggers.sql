@@ -44,7 +44,7 @@ EXECUTE FUNCTION check_menu_disponibilite();
 CREATE OR REPLACE FUNCTION log_employee_action()
 RETURNS TRIGGER AS $$
 BEGIN
-    INSERT INTO Logs_Activites (ID_Employe, ID_Commande, Action, Date_Action)
+    INSERT INTO Logs_Activites (ID_Employe, ID_Commande, actiondescr, Date_Action)
     VALUES (NEW.ID_Employe, NEW.ID_Commande, TG_OP, NOW());
     RETURN NEW;
 END;
@@ -263,7 +263,7 @@ EXECUTE FUNCTION update_vehicule_disponibilite();
 
 
 
- ############################################
+-- ############################################
 -- ## Trigger 10 : Historique affectation livreur ##
 -- ############################################
 --
@@ -285,3 +285,42 @@ CREATE TRIGGER trigger_log_livreur_affectation
 AFTER UPDATE OF ID_Vehicule ON Livreur
 FOR EACH ROW
 EXECUTE FUNCTION log_livreur_affectation();
+
+
+
+
+
+
+-- ############################################
+-- ## Trigger 11 : Historique affectation livreur ##
+-- ############################################
+-- **Description** :
+-- Actualise la colonne total_commande
+
+-- Créer la fonction qui met à jour Total_Commande
+CREATE OR REPLACE FUNCTION update_total_commande() 
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Mettre à jour Total_Commande à chaque modification dans Details_Commande
+    UPDATE Commandes
+    SET Total_Commande = (
+        SELECT SUM(d.Quantite * m.Prix)
+        FROM Details_Commande d
+        JOIN Menus m ON d.ID_Plat = m.ID_Plat
+        WHERE d.ID_Commande = Commandes.ID_Commande
+    )
+    WHERE ID_Commande = NEW.ID_Commande OR ID_Commande = OLD.ID_Commande;
+    RETURN NEW;  -- Retourner la nouvelle ligne
+END;
+$$ LANGUAGE plpgsql;
+
+-- Créer le trigger pour mettre à jour Total_Commande lors de l'insertion, de la mise à jour ou de la suppression dans Details_Commande
+CREATE TRIGGER trigger_update_total_commande
+AFTER INSERT OR UPDATE OR DELETE ON Details_Commande
+FOR EACH ROW
+EXECUTE FUNCTION update_total_commande();
+
+
+-- Exemple d'insertion
+INSERT INTO Details_Commande (ID_Commande, ID_Plat, Quantite) 
+VALUES (3, 7, 2);
