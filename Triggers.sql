@@ -285,6 +285,7 @@ CREATE TRIGGER trigger_log_livreur_affectation
 AFTER UPDATE OF ID_Vehicule ON Livreur
 FOR EACH ROW
 EXECUTE FUNCTION log_livreur_affectation();
+<<<<<<< HEAD
 
 
 
@@ -324,3 +325,5 @@ EXECUTE FUNCTION update_total_commande();
 -- Exemple d'insertion
 INSERT INTO Details_Commande (ID_Commande, ID_Plat, Quantite) 
 VALUES (3, 7, 2);
+=======
+>>>>>>> b236d7356f393922b374383f03a3e91a41b8433f
