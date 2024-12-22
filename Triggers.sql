@@ -44,7 +44,7 @@ EXECUTE FUNCTION check_menu_disponibilite();
 CREATE OR REPLACE FUNCTION log_employee_action()
 RETURNS TRIGGER AS $$
 BEGIN
-    INSERT INTO Logs_Activites (ID_Employe, ID_Commande, Action, Date_Action)
+    INSERT INTO Logs_Activites (ID_Employe, ID_Commande, actiondescr, Date_Action)
     VALUES (NEW.ID_Employe, NEW.ID_Commande, TG_OP, NOW());
     RETURN NEW;
 END;
